@@ -1,43 +1,14 @@
 import React, { useEffect, useState } from "react";
 import MovieCard from "./MovieCard";
-import TOKEN from "../../api/api_token";
+import useFetch from "@hooks/useFetch";
 
 const MediaList = ({ title, tabs }) => {
-  const [mediaList, setMediaList] = useState([]);
   const [activeTabId, setActiveTabId] = useState(tabs[0]?.id);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
-  useEffect(() => {
-    setLoading(true);
-    setError(null);
-    const activeTab = tabs.find((tab) => tab.id === activeTabId);
-    if (activeTab && activeTab.url) {
-      fetch(activeTab.url, {
-        method: "GET",
-        headers: {
-          accept: "application/json",
-          Authorization: `Bearer ${TOKEN}`,
-        },
-      })
-        .then(async (res) => {
-          if (!res.ok) {
-            throw new Error(`HTTP error! status: ${res.status}`);
-          }
-          const data = await res.json();
-          const trendingMediaList = data.results.slice(0, 12);
-          setMediaList(trendingMediaList);
-          setLoading(false);
-        })
-        .catch((err) => {
-          console.log(err);
-          setError(err.message);
-          setLoading(false);
-        });
-    } else {
-      setLoading(false);
-    }
-  }, [activeTabId, tabs]);
+  const url = tabs.find((tab) => tab.id === activeTabId)?.url;
+
+  const { data, isLoading: loading } = useFetch({ url });
+  const mediaList = (data.results || []).slice(0, 12);
 
   return (
     <div className="px-8 text-[1.2vw] py-10 bg-black text-white">
@@ -66,8 +37,6 @@ const MediaList = ({ title, tabs }) => {
       </div>
       {loading ? (
         <div className="text-center py-10">Loading...</div>
-      ) : error ? (
-        <div className="text-center py-10">Error: {error}</div>
       ) : (
         <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-4 lg:gap-6">
           {mediaList.map((media) => {

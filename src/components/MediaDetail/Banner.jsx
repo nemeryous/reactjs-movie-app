@@ -20,7 +20,7 @@ const Banner = ({ mediaInfo }) => {
   const groupedCrews = groupBy(crews, "job");
   console.log(groupedCrews);
   return (
-    <div className="relative text-white overflow-hidden">
+    <div className="relative text-white overflow-hidden shadow-sm shadow-skate-800">
       <img
         className="absolute inset-0 brightness-[.2]"
         src={`https://image.tmdb.org/t/p/original${mediaInfo.backdrop_path}`}
@@ -31,6 +31,8 @@ const Banner = ({ mediaInfo }) => {
           <img
             src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${mediaInfo.poster_path}`}
             alt=""
+            width={600}
+            height={900}
           />
         </div>
 
@@ -48,7 +50,7 @@ const Banner = ({ mediaInfo }) => {
           <div className="mt-4 flex items-center gap-4">
             <div className="flex items-center gap-2">
               <CircularProgressBar
-                percent={Math.round(mediaInfo.vote_average * 10)}
+                percent={Math.round((mediaInfo.vote_average || 0) * 10)}
                 size={3.5}
                 strokeWidth={0.3}
               />{" "}
@@ -56,7 +58,7 @@ const Banner = ({ mediaInfo }) => {
             </div>
             <button>
               <FontAwesomeIcon icon={faPlay} />
-              Tra
+              Trailer
             </button>
           </div>
           <div className="mt-4">

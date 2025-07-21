@@ -3,20 +3,6 @@
 const PaginateIndicator = (props) => {
   // const [activeIndex, setActiveIndex] = useState();
   const { movies, activeMovieId, setActiveMovieId } = props;
-
-  // useEffect(() => {
-  //   if (movies.length > 0) {
-  //     setActiveMovieId(movies[activeIndex]?.id);
-  //   }
-  // }, [activeIndex, movies, setActiveMovieId]);
-
-  // useEffect(() => {
-  //   if (movies.length === 0) return;
-  //   const interval = setInterval(() => {
-  //     setActiveIndex((prevIndex) => (prevIndex + 1) % movies.length);
-  //   }, 5000);
-  //   return () => clearInterval(interval); 
-  // }, [movies]);
   return (
     <div className="absolute right-8 bottom-[10%]">
       <ul className="flex gap-1">
