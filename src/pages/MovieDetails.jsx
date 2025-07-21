@@ -1,14 +1,18 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import TOKEN from "../api/api_token";
-import Loading from "../components/Loading";
-import Banner from "../components/MediaDetail/Banner";
-import ActorList from "../components/MediaDetail/ActorList";
+import Loading from "@components/Loading";
+import Banner from "@components/MediaDetail/Banner";
+import ActorList from "@components/MediaDetail/ActorList";
+import RelatedMediaList from "@components/MediaDetail/RelatedMediaList";
 
 const MovieDetails = () => {
   const { id } = useParams();
   const [movieInfo, setMovieInfo] = useState({});
   const [isLoading, setIsLoading] = useState(false);
+  const [isRelatedMediaLoading, setIsRelatedMediaLoading] = useState(false);
+  const [relatedMedia, setRelatedMedia] = useState([]);
   // console.log(id);
   useEffect(() => {
     setIsLoading(true);
@@ -34,7 +38,29 @@ const MovieDetails = () => {
         setIsLoading(false);
       });
   }, [id]);
+  useEffect(() => {
+    setIsRelatedMediaLoading(true);
+    fetch(`https://api.themoviedb.org/3/movie/${id}/recommendations`, {
+      method: "GET",
+      headers: {
+        accept: "application/json",
+        Authorization: `Bearer ${TOKEN}`,
+      },
+    })
+      .then(async (res) => {
+        const data = await res.json();
 
+        const currentRelatedMedia = (data.results || []).slice(0, 12);
+        setRelatedMedia(currentRelatedMedia);
+        // setMovieInfo(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }, [id]);
   if (isLoading) {
     return <Loading />;
   }
@@ -45,6 +71,7 @@ const MovieDetails = () => {
         <div className="flex mx-auto max-w-7xl px-6 py-10 gap-6">
           <div className="flex-2/3">
             <ActorList actors={movieInfo.credits?.cast} />
+            <RelatedMediaList mediaList={relatedMedia} />
           </div>
           <div className="flex-1/3">
             <p>Information</p>
