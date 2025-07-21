@@ -15,32 +15,7 @@ const FeatureMovie = () => {
       setActiveMovieId(movies[0].id);
     }
   }, [JSON.stringify(movies)]);
-  // useEffect(() => {
-  //   setLoading(true);
-  //   setError(null);
-  //   fetch("https://api.themoviedb.org/3/movie/popular", {
-  //     method: "GET",
-  //     headers: {
-  //       accept: "application/json",
-  //       Authorization: `Bearer ${TOKEN}`,
-  //     },
-  //   })
-  //     .then(async (res) => {
-  //       if (!res.ok) {
-  //         throw new Error(`HTTP error! status: ${res.status}`);
-  //       }
-  //       const data = await res.json();
-  //       const popularMovies = data.results.slice(0, 4);
-  //       setActiveMovieId(popularMovies[0]?.id);
-  //       setMovies(popularMovies);
-  //       setLoading(false);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //       setError(err.message);
-  //       setLoading(false);
-  //     });
-  // }, []);
+
 
   if (loading) {
     return <div className="text-white text-center py-10">Loading...</div>;

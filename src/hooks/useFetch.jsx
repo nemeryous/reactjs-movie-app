@@ -21,10 +21,10 @@ export default function useFetch({ url = "", method = "GET", headers = {} }) {
       .then(async (res) => {
         const data = await res.json();
         setData(data);
-        console.log(data);
+        // console.log(data);
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       })
       .finally(() => {
         setIsLoading(false);

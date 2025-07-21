@@ -2,10 +2,9 @@ import React, { useState } from "react";
 import ActorInfo from "./ActorInfo";
 
 const ActorList = ({ actors = [] }) => {
-  console.log(actors);
   const [isShowMore, setIsShowMore] = useState(false);
   const currentActors = isShowMore ? actors.splice(0, 10) : actors.slice(0, 4);
-  console.log(currentActors);
+
   return (
     <div>
       <p className="font-bold text-[1.4vw] mb-4">Actors</p>
@@ -18,6 +17,7 @@ const ActorList = ({ actors = [] }) => {
             name={actor.name}
             character={actor.character}
             profilePath={actor.profile_path}
+            episodeCount={actor.episodeCount}
           />
         ))}
 

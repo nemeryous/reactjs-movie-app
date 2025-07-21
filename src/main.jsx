@@ -5,6 +5,7 @@ import HomePage from "./pages/HomePage.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import MovieDetails from "./pages/MovieDetails.jsx";
 import RootLayout from "./pages/RootLayout.jsx";
+import TVShowDetail from "@pages/TVShowDetail";
 
 const router = createBrowserRouter([
   {
@@ -18,13 +19,14 @@ const router = createBrowserRouter([
         path: "/movie/:id",
         element: <MovieDetails />,
       },
+      {
+        path: "/tv/:id",
+        element: <TVShowDetail />,
+      },
     ],
   },
 ]);
 
 createRoot(document.getElementById("root")).render(
-  <StrictMode>
-    {/* <App /> */}
-    <RouterProvider router={router} />
-  </StrictMode>
+  <RouterProvider router={router} />
 );

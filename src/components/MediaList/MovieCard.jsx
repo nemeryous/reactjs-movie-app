@@ -6,7 +6,7 @@ import Image from "@components/Image";
 const MovieCard = ({ id, title, releaseDay, poster, point, mediaType }) => {
   return (
     <Link
-      to={`/movie/${id}`}
+      to={mediaType === 'tv' ? `/tv/${id}` : `/movie/${id}`}
       className="border border-slate-800 rounded-lg relative"
     >
       <div className="  ">

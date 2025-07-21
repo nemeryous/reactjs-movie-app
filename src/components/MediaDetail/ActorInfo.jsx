@@ -1,7 +1,7 @@
 import ImageComponent from "@components/Image";
 import React from "react";
 
-const ActorInfo = ({ id, name, character, profilePath }) => {
+const ActorInfo = ({ id, name, character, profilePath, episodeCount }) => {
   return (
     <div className="border border-slate-300 shadow-sm rounded-lg bg-black">
       {/* <img
@@ -28,6 +28,7 @@ const ActorInfo = ({ id, name, character, profilePath }) => {
       <div className="p-3">
         <p className="font-bold">{name}</p>
         <p>{character}</p>
+        <p>{episodeCount} Episodes</p>
         {/* <p>18 episode</p> */}
       </div>
     </div>
