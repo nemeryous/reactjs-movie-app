@@ -8,6 +8,7 @@ import RelatedMediaList from "@components/MediaDetail/RelatedMediaList";
 import MediaInformation from "@components/MediaDetail/MediaInformation";
 import useFetch from "@hooks/useFetch";
 import TVShowInformation from "@components/MediaDetail/TVShowInformation";
+import SeasonList from "@components/MediaDetail/SeasonList";
 
 const TVShowDetail = () => {
   const { id } = useParams();
@@ -62,6 +63,8 @@ const TVShowDetail = () => {
                 episodeCount: cast.roles[0]?.episode_count,
               }))}
             />
+
+            <SeasonList seasons={(tvInfo.seasons || []).reverse()} />
             <RelatedMediaList
               mediaList={relatedMedia}
               isLoading={isRelatedMediaLoading}
